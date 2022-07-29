@@ -1,0 +1,199 @@
+= 2022-02-27_solidTypescript
+
+== SOLID
+
+First I had to check the pillars of OOP, so I did.
+
+=== the 4 pillars of OOP
+
+==== 1. Abstraction (abstractie, veralgemenen)
+
+To abstract something away means to hide away the implementation details inside something – sometimes a prototype, sometimes a function.
+So when you call the function you don't have to understand exactly what it is doing.
+Abstraction is the concept of wrapping up complex actions in simple verbs.
+Describe each thing you’ve abstracted clearly, and hide the complexity. 
+
+(Iets 'weg abstracteren' betekent de implementatiedetails in iets verbergen - soms een prototype, soms een functie.
+Dus wanneer u de functie aanroept, hoeft u niet precies te begrijpen wat deze doet.
+Abstractie is het concept van complexe acties in eenvoudige werkwoorden.
+Beschrijf alles wat je hebt geabstraheerd duidelijk en verberg de complexiteit.)
+
+==== 2. Encapsulation (inkapseling)
+
+The definition of encapsulation is "the action of enclosing something in or as if in a capsule".
+Removing access to parts of your code and making things private is exactly what Encapsulation is all about
+As much as you can, keep state and logic internal, limit what pieces of your code can access.
+Make more things inaccessible, if they aren't needed.
+The less you have to keep track off at any given time, the better.
+In a nutshell: Binding your data to something, whether it's a class, object,
+module or function, and doing your best to keep it as private as you reasonably can.
+
+NOTE: Abstraction and encapsulation support each other. If you don’t group like things together,
+then you’re going to have a harder time abstracting them. They’ll have to be passing data back and forth.
+
+(De definitie van inkapseling is "de actie van het insluiten van iets in of alsof het in een capsule zit".
+Toegang tot delen van uw code verwijderen en dingen privé maken is precies waar het bij Encapsulation om draait
+Houd zoveel als je kunt de status en logica intern, beperk tot welke delen van je code toegang is.
+Maak meer dingen ontoegankelijk als ze niet nodig zijn.
+Hoe minder u op een bepaald moment hoeft bij te houden, hoe beter.)
+Kort samengevat: uw gegevens aan iets binden, of het nu een klasse, object,
+module of functie, en uw best doen om deze zo privé mogelijk te houden.
+
+(OPM: Abstractie en inkapseling ondersteunen elkaar. Als je gelijkaardige dingen niet groepeert,
+dan zul je het moeilijker hebben om ze te abstraheren. Ze moeten gegevens heen en weer doorgeven)
+
+==== 3. Inheritance (overerven)
+
+Inheritance lets one object acquire the properties and methods of another object
+Classes can have parent classes. Child classes will inherit all of the behavior and attributes of the parent class.
+Reliability is the main benefit here. We sometimes know that several places have to do the same thing,
+except for a small part. This is a problem inheritance can solve
+Child classes can then choose to overwrite some of those as necessary.
+
+NOTE: Keep your inheritance simple to understand and predictable.
+Don't inherit from somewhere completely unrelated because there's one method or property you need.
+Inheritance doesn't fix that particular problem well.
+When using inheritance, you should require most of the functionality (you don't always need absolutely everything).
+
+(Overerving laat een object de eigenschappen en methoden van een ander object verkrijgen
+'Classes' kunnen 'parent classes' hebben. 'Child classes' erven al het gedrag en de kenmerken van de bovenliggende klasse.
+Herbruikbaarheid is hier het belangrijkste voordeel. We weten soms dat meerdere plaatsen hetzelfde moeten doen,
+op een klein onderdeel na. Dit is een probleem dat erfenis kan oplossen
+Kinderklassen kunnen er dan voor kiezen om een aantal daarvan te overschrijven als dat nodig is.)
+
+OPM: Houd 'inheritance' eenvoudig te begrijpen en voorspelbaar.
+Erf niet van iets wat helemaal niets met elkaar te maken heeft, want er is één methode of eigenschap die je nodig hebt.
+'Inheritance' lost dat specifieke probleem niet op. Als u 'inheritance' gebruikt, zou u de meeste functionaliteit nodig moeten hebben
+(u hebt niet altijd alles nodig).
+
+==== 4. Polymorphism
+
+Polymorphism is defined as “the condition of occurring in several forms”.
+Basically, it just means that we can call the same method on different objects.
+If there’s a verb/method name that works for similar processes, just use that same name,
+even if it does not actually refer to the same thing happening
+Inheritance and Polymorphism kind of go together.
+At least in the sense that all child classes will have the methods and attributes that were defined on the parent class.
+If you have used inheritance correctly you can now reliably use parents like their children.
+When two types share an inheritance chain, they can be used interchangeably with no errors
+or assertions in your code.
+
+(Polymorfisme wordt gedefinieerd als "de toestand waarin verschillende vormen voorkomen".
+Kortom, het betekent gewoon dat we dezelfde methode op verschillende objecten kunnen aanroepen.
+Als er een werkwoord-/methodenaam is die voor vergelijkbare processen werkt, gebruik dan gewoon dezelfde naam,
+zelfs als het niet echt verwijst naar hetzelfde gebeuren
+Overerving en polymorfisme gaan een beetje samen.
+Tenminste in die zin dat alle onderliggende klassen de methoden en attributen zullen hebben die zijn gedefinieerd voor de bovenliggende klasse.
+Als u de erfenis correct hebt gebruikt, kunt u nu betrouwbaar ouders zoals hun kinderen gebruiken.
+Wanneer twee typen een overervingsketen delen, kunnen ze zonder fouten door elkaar worden gebruikt
+of beweringen in uw code)
+
+=== SOLID
+
+a new principe I have to find out.
+
+SINGLE RESPONSIBILITY PRINCIPLE (SRP) —
+A class should only have a single responsibility, that is, only changes to
+one part of the software's specification should be able to affect the specification of the class.
+- definition SRP:
+ - a class can only have 1 responsibility
+ - if you explain what a class does, and you use the word and, there is more than 1 responsibility
+ - if a class follows SRP, you can't think of more than one reason for that class to change
+
+OPEN-CLOSED PRINCIPLE — Classes and other entities should be open for extension but closed for modification.
+
+LISKOV SUBSTITUTION PRINCIPLE — Objects should be replaceable by their subtypes. See also design by contract. = polymorphism
+
+INTERFACE SEGREGATION PRINCIPLE — Interfaces should be client specific rather than general.
+
+DEPENDENCY INVERSION PRINCIPLE — Depend on abstractions rather than concretions.
+
+=== TYPESCRIPT
+
+* WHAT :
+superscript of JavaScript
+
+* WHY: 
+** types defines -&gt; safer
+** easy; few lines of code
+** OOP: interfaces, inheritance and encapsulation
+
+* HOW:
+* variables and Data Types:
+** Primitive Types (number, string, boolean, any) :
+*** you can declare 1 type: ``variable:type = ... ;`
+*** or multiple: `variable:type1 | type2 = ... ;`
+* Array Types : `variable: Array<type>; = ... ;`
+* enum variables:
+ `- Enum Types (predetermined values) :
+
+  enum Variable {                                //with capital letter
+  Value1, // index 0
+  Value2, // index 1
+  Value3=5 //index = 5
+  }
+ console.log(Variable.Value1); // gives the index number of the enum value1 (O)
+ console.log(Variable[1]); // gives the name af the enum, with index 1 (value2)
+ console.log(Variable[5]); // gives the name af the enum, with index 5 (value3)
+
+* Comments (// or /* */)
+
+* string types
+
+ var s1:string = "<a href=''/>";
+ var userName:string= 'Greet';
+ var s2:string = `My name is ${userName}`;
+ console.log(s2);
+ console.log(s2.length);
+ console.log(s2.charAt(0));
+ console.log(s2.indexOf('n')); // first appearance
+ console.log(s2.lastIndexOf('n')); // last appearance
+ console.log(username.charCodeAt(0)); // caractercode of first caracter (capital)
+
+* Arithmetic (-, +, %, /, *)
+* Assignment (= and compound operators: +=, -=, %=, /=, *= )
+* Comparison (=== , !==, &gt;, &lt;, &lt;=, &gt;=)
+* Logical (&amp;&amp; , ||, !) used in booleans
+* Ternary (testExpression? value1: value2) // if true =&gt; value1, if not true =&gt; value2
+
+* Flow Control
+ ** Selection (if=else, switch)
+ ** Iterative (while, for)
+ ** Transfer (break, continue)
+
+*  Objects
+
+** for In Loop
+
+ for(var item in student){
+   console.log(item);
+   console.log(student[item]                // Te get the values
+ });
+
+* Arrays
+
+NOTE: De-structuring in Array != de-structuring in Objects
+
+* Functions
+** Optional Parameters
+** Default Values
+** Anonymous Function
+** Functional Overloading
+** Rest params
+*Arrow Functions
+** Variable Prefixes
+* let
+* const
+* declare
+* OOPS
+** Interfaces
+** object
+** functions
+** arrays
+** Classes
+** create
+** constructor
+** implementing an interface
+** inheritance
+** encapsulation
+** type casting
