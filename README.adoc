@@ -99,14 +99,34 @@ one part of the software's specification should be able to affect the specificat
  - a class can only have 1 responsibility
  - if you explain what a class does, and you use the word and, there is more than 1 responsibility
  - if a class follows SRP, you can't think of more than one reason for that class to change
+ - a class should do one thing, and therefore it should have only a single reason to change.
 
 OPEN-CLOSED PRINCIPLE — Classes and other entities should be open for extension but closed for modification.
+So what this principle wants to say is: We should be able to add new functionality without touching the existing code for the class.
+This is because whenever we modify the existing code, we are taking the risk of creating potential bugs.
+So we should avoid touching the tested and reliable (mostly) production code if possible.
 
 LISKOV SUBSTITUTION PRINCIPLE — Objects should be replaceable by their subtypes. See also design by contract. = polymorphism
 
 INTERFACE SEGREGATION PRINCIPLE — Interfaces should be client specific rather than general.
 
 DEPENDENCY INVERSION PRINCIPLE — Depend on abstractions rather than concretions.
+
+==== EXERCISES
+0.S
+The Car class contains too much information and functions.
+It is better to put this data in separate classes (radio and engine).
+The properties must then be created and called in the Car class (get fuel, get radio).
+
+The 'oldradiolevel' is set equal to the 'radiolevel', the 'new' value is set equal to 'radiolevel'
+
+Because certain sentences are repeated, it is best to make a const of this. If you then want to change the text,
+you only have to do this in 1 place. (turn music on/of)
+
+1.O
+I made the function 'makeSound' dependent on the animal instead of the zoo.
+Because all animal classes were so similar, I made a new class (Anima) to which you pass what type of animal it is.
+I don't know if it's supposed to be that way, but this seems the most logical to me...
 
 === TYPESCRIPT
 
@@ -197,3 +217,4 @@ NOTE: De-structuring in Array != de-structuring in Objects
 ** inheritance
 ** encapsulation
 ** type casting
+
