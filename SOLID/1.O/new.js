@@ -1,10 +1,7 @@
-var Animal = /** @class */ (function () {
-    function Animal(type, name, sound) {
-        this._name = name;
-        this._sound = sound;
-        this._type = type;
+var Dog = /** @class */ (function () {
+    function Dog() {
     }
-    Object.defineProperty(Animal.prototype, "name", {
+    Object.defineProperty(Dog.prototype, "name", {
         get: function () {
             return this._name;
         },
@@ -14,105 +11,68 @@ var Animal = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    Animal.prototype.makeSound = function () {
-        return this._sound;
+    Dog.prototype.makeSound = function () {
+        return "Woef";
     };
-    Object.defineProperty(Animal.prototype, "type", {
+    Object.defineProperty(Dog.prototype, "type", {
         get: function () {
-            return this._type;
+            return 'dog';
         },
         enumerable: false,
         configurable: true
     });
-    return Animal;
+    return Dog;
 }());
-/*
-
-class Dog {
-    private _name;
-    private readonly _sound;
-    private readonly _type;
-
-
-    constructor(name:string){
-        this._name= name;
-        this._sound= 'Woef';
-        this._type= 'dog'
-
+var Cat = /** @class */ (function () {
+    function Cat() {
     }
-    set name(value) {
-        this._name = value;
+    Object.defineProperty(Cat.prototype, "name", {
+        get: function () {
+            return this._name;
+        },
+        set: function (value) {
+            this._name = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Cat.prototype.makeSound = function () {
+        return "miauw";
+    };
+    Object.defineProperty(Cat.prototype, "type", {
+        get: function () {
+            return 'cat';
+        },
+        enumerable: false,
+        configurable: true
+    });
+    return Cat;
+}());
+var Parrot = /** @class */ (function () {
+    function Parrot() {
     }
-
-    get name() {
-        return this._name;
-    }
-
-    public makeSound() {
-        return this._sound;
-    }
-
-    get type() {
-        return this._type;
-    }
-}
-
-class Cat {
-    private _name;
-    private readonly _sound;
-    private readonly _type;
-
-    constructor(name:string) {
-        this._name= name;
-        this._sound= 'Miauw';
-        this._type= 'cat';
-    }
-
-    set name(value) {
-        this._name = value;
-    }
-
-    get name() {
-        return this._name;
-    }
-
-    public makeSound() {
-        return this._sound;
-    }
-
-    get type() {
-        return this._type;
-    }
-}
-
-class Parrot {
-    private _name;
-    private readonly _sound;
-    private readonly _type;
-
-    constructor(name:string){
-    this._name= name;
-    this._sound= `I am ${name}`;
-    this._type= 'parrot';
-    }
-
-    set name(value) {
-        this._name = value;
-    }
-
-    get name() {
-        return this._name;
-    }
-
-    public makeSound() {
-        return this._sound;
-    }
-
-    get type() {
-        return this._type;
-    }
-}
-*/
+    Object.defineProperty(Parrot.prototype, "name", {
+        get: function () {
+            return this._name;
+        },
+        set: function (value) {
+            this._name = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Parrot.prototype.makeSound = function () {
+        return "I am a pirate";
+    };
+    Object.defineProperty(Parrot.prototype, "type", {
+        get: function () {
+            return 'parrot';
+        },
+        enumerable: false,
+        configurable: true
+    });
+    return Parrot;
+}());
 var Zoo = /** @class */ (function () {
     function Zoo() {
         this._animals = new Array();
@@ -130,10 +90,9 @@ var Zoo = /** @class */ (function () {
     return Zoo;
 }());
 var zoo = new Zoo;
-zoo.addAnimal(new Animal('cat', 'Snuffel', 'miauw'));
-zoo.addAnimal(new Animal('dog', 'Molly', 'Woef'));
-zoo.addAnimal(new Animal('parrot', 'Kiki', "I am a pirate"));
-zoo.addAnimal(new Animal('maraboe', 'Daan', 'klepper de klep'));
+zoo.addAnimal(new Cat());
+zoo.addAnimal(new Dog());
+zoo.addAnimal(new Parrot());
 zoo.animals.forEach(function (animal) {
     document.querySelector('#target').innerHTML += (animal.type + ": " + animal.makeSound() + "<br>");
 });
