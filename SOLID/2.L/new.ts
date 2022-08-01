@@ -1,55 +1,68 @@
-//This is called a Union, the discountType can only contain the following 2 values:
-type discountType = "variable" | "fixed" | "none";
+interface DiscountType {
+    applyDiscount(price:number): number;
+    showCalculation(price:number): string;
+}
 
-class Discount {
-    private _type: discountType;
+
+class VariableDiscount implements DiscountType {
+  /*  private _discountType: string = 'variable';*/
+    private readonly _value: number;
+
+    constructor(value: number= 0) {
+        this._value = value;
+    }
+
+    applyDiscount(price: number): number {
+     return (price - (price * this._value / 100));
+
+        }
+
+    showCalculation(price: number): string {
+     return price + " € -  " + this._value + "%";
+     }
+
+}
+
+class FixedDiscount implements DiscountType {
+  /*  private _discountType: string = 'fixed';*/
+    private readonly _value: number;
+
+    constructor(value: number= 0) {
+        this._value = value;
+    }
+
+    applyDiscount(price: number): number {
+        return Math.max(0, price - this._value);
+    }
+
+    showCalculation(price: number): string {
+      return price + "€ -  " + this._value + "€ (min 0 €)";
+    }
+}
+class NoDiscount implements DiscountType {
+  /*  private _discountType: string = 'fixed';*/
     private _value: number;
 
-    constructor(type : discountType, value : number = 0) {
-        this._type = type;
+    constructor(value: number= 0) {
         this._value = value;
-
-        if(this._type != 'none' && value <= 0) {
-            throw new Error('You cannot create a '+ this._type + ' discount with a negative value');
-        }
     }
 
-    apply(price : number) : number {
-        //@todo: instead of using magic values as string in this, it would be a lot better to change them into constant. This would protect us from misspellings. Can you improve this?
-        if(this._type === "none")  {
-            return price;
-        }
-        else if(this._type === "variable")  {
-            return (price - (price * this._value / 100));
-        } else if(this._type === "fixed") {
-            return Math.max(0, price - this._value);
-        }
-        else {
-            throw new Error('Invalid type of discount');
-        }
+    applyDiscount(price: number): number {
+        return price
     }
 
-    showCalculation(price : number) : string {
-        if(this._type === "none")  {
-            return "No discount";
-        }
-        else if(this._type === "variable")  {
-            return price + " € -  "+ this._value +"%";
-        } else if(this._type === "fixed") {
-            return price + "€ -  "+ this._value +"€ (min 0 €)";
-        }
-        else {
-            throw new Error('Invalid type of discount');
-        }
+    showCalculation(price: number): string {
+      return'No discount'
     }
 }
 
-class Product {
-    private _name : string;
-    private _price : number;
-    private _discount : Discount;
 
-    constructor(name: string, price: number, discount: Discount) {
+class Product {
+    private readonly _name: string;
+    private readonly _price: number;
+    private readonly _discount: DiscountType;
+
+    constructor(name: string, price: number, discount: DiscountType) {
         this._name = name;
         this._price = price;
         this._discount = discount;
@@ -59,7 +72,7 @@ class Product {
         return this._name;
     }
 
-    get discount(): Discount {
+    get discount(): DiscountType {
         return this._discount;
     }
 
@@ -67,19 +80,16 @@ class Product {
         return this._price;
     }
 
-    //The reason we call this function "calculateX" instead of using a getter on Price is because names communicate a lot of meaning between programmers.
-    //most programmers would assume a getPrice() would be a simple display of a property that is already calculated, but in fact this function does a (more expensive) operation to calculate on the fly.
-    calculatePrice() : number {
-        return this._discount.apply(this._price);
+    calculatePrice(): number {
+        return this._discount.applyDiscount(this._price);
     }
 
-    showCalculation() : string {
+    showCalculation(): string {
         return this._discount.showCalculation(this._price);
     }
 }
 
 class shoppingBasket {
-    //this array only accepts Product objects, nothing else
     private _products: Product[] = [];
 
     get products(): Product[] {
@@ -92,10 +102,10 @@ class shoppingBasket {
 }
 
 let cart = new shoppingBasket();
-cart.addProduct(new Product('Chair', 25, new Discount("fixed", 10)));
-//cart.addProduct(new Product('Chair', 25, new Discount("fixed", -10)));
-cart.addProduct(new Product('Table', 50, new Discount("variable", 25)));
-cart.addProduct(new Product('Bed', 100, new Discount("none")));
+cart.addProduct(new Product('Chair', 25, new FixedDiscount(10)));
+cart.addProduct(new Product('Table', 50, new VariableDiscount(25)));
+cart.addProduct(new Product('Bed', 100, new NoDiscount()));
+
 
 const tableElement = document.querySelector('#cart tbody');
 cart.products.forEach((product) => {
