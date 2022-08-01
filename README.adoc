@@ -88,23 +88,34 @@ Als u de erfenis correct hebt gebruikt, kunt u nu betrouwbaar ouders zoals hun k
 Wanneer twee typen een overervingsketen delen, kunnen ze zonder fouten door elkaar worden gebruikt
 of beweringen in uw code)
 
-=== SOLID
+=== SOLID THEORY
 
 a new principe I have to find out.
 
 SINGLE RESPONSIBILITY PRINCIPLE (SRP) —
 A class should only have a single responsibility, that is, only changes to
 one part of the software's specification should be able to affect the specification of the class.
-- definition SRP:
- - a class can only have 1 responsibility
- - if you explain what a class does, and you use the word and, there is more than 1 responsibility
- - if a class follows SRP, you can't think of more than one reason for that class to change
- - a class should do one thing, and therefore it should have only a single reason to change.
+
+===== definition SRP
+  -  a class can only have 1 responsibility
+  -  if you explain what a class does, and you use the word and, there is more than 1 responsibility
+  -  if a class follows SRP, you can't think of more than one reason for that class to change
+  -  a class should do one thing, and therefore it should have only a single reason to change.
 
 OPEN-CLOSED PRINCIPLE — Classes and other entities should be open for extension but closed for modification.
 So what this principle wants to say is: We should be able to add new functionality without touching the existing code for the class.
 This is because whenever we modify the existing code, we are taking the risk of creating potential bugs.
 So we should avoid touching the tested and reliable (mostly) production code if possible.
+
+==== For this part, we have to use 'extend' and 'implement'
+  - Implement (used for polymorphism): Whenever we want to say that an object being passed has a specific set of attributes, we can use an interface.
+    A class can implement more than one interface, which have their own attributes and/or (empty)methods .
+    Each class that implements a particular interface with a method, is required to write out a specific code for this methods.
+    NOTE: all attributes of an interface are public!
+  - Extend (to profit from inheritance): A class can only extend (subclass) one parent.
+    The extends keyword is used in class declarations or class expressions to create a class that is a child of another class.
+    The child class inherits all properties and methods from the parent class, it can override some of these and implement new ones,
+    but the parent stuff is already included.
 
 LISKOV SUBSTITUTION PRINCIPLE — Objects should be replaceable by their subtypes. See also design by contract. = polymorphism
 
@@ -112,7 +123,7 @@ INTERFACE SEGREGATION PRINCIPLE — Interfaces should be client specific rather 
 
 DEPENDENCY INVERSION PRINCIPLE — Depend on abstractions rather than concretions.
 
-==== EXERCISES
+==== SOLID EXERCISES
 0.S
 The Car class contains too much information and functions.
 It is better to put this data in separate classes (radio and engine).
@@ -127,6 +138,8 @@ you only have to do this in 1 place. (turn music on/of)
 I made the function 'makeSound' dependent on the animal instead of the zoo.
 Because all animal classes were so similar, I made a new class (Anima) to which you pass what type of animal it is.
 I don't know if it's supposed to be that way, but this seems the most logical to me...
+It was not the right solution, so I had to change it.
+
 
 === TYPESCRIPT
 
