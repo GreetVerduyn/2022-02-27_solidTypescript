@@ -8,7 +8,8 @@ First I had to check the pillars of OOP, so I did.
 
 ==== 1. Abstraction (abstractie, veralgemenen)
 
-To abstract something away means to hide away the implementation details inside something – sometimes a prototype, sometimes a function.
+To abstract something away means to hide away the implementation details inside something – sometimes a prototype,
+sometimes a function.
 So when you call the function you don't have to understand exactly what it is doing.
 Abstraction is the concept of wrapping up complex actions in simple verbs.
 Describe each thing you’ve abstracted clearly, and hide the complexity. 
@@ -63,8 +64,8 @@ Kinderklassen kunnen er dan voor kiezen om een aantal daarvan te overschrijven a
 
 OPM: Houd 'inheritance' eenvoudig te begrijpen en voorspelbaar.
 Erf niet van iets wat helemaal niets met elkaar te maken heeft, want er is één methode of eigenschap die je nodig hebt.
-'Inheritance' lost dat specifieke probleem niet op. Als u 'inheritance' gebruikt, zou u de meeste functionaliteit nodig moeten hebben
-(u hebt niet altijd alles nodig).
+'Inheritance' lost dat specifieke probleem niet op. Als u 'inheritance' gebruikt, zou u de meeste functionaliteit nodig
+moeten hebben (u hebt niet altijd alles nodig).
 
 ==== 4. Polymorphism
 
@@ -83,7 +84,8 @@ Kortom, het betekent gewoon dat we dezelfde methode op verschillende objecten ku
 Als er een werkwoord-/methodenaam is die voor vergelijkbare processen werkt, gebruik dan gewoon dezelfde naam,
 zelfs als het niet echt verwijst naar hetzelfde gebeuren
 Overerving en polymorfisme gaan een beetje samen.
-Tenminste in die zin dat alle onderliggende klassen de methoden en attributen zullen hebben die zijn gedefinieerd voor de bovenliggende klasse.
+Tenminste in die zin dat alle onderliggende klassen de methoden en attributen zullen hebben die zijn gedefinieerd
+voor de bovenliggende klasse.
 Als u de erfenis correct hebt gebruikt, kunt u nu betrouwbaar ouders zoals hun kinderen gebruiken.
 Wanneer twee typen een overervingsketen delen, kunnen ze zonder fouten door elkaar worden gebruikt
 of beweringen in uw code)
@@ -109,7 +111,8 @@ This is because whenever we modify the existing code, we are taking the risk of 
 So we should avoid touching the tested and reliable (mostly) production code if possible.
 
 ===== For this part, we have to use 'extend' and 'implement'
-  - Implement (used for polymorphism): Whenever we want to say that an object being passed has a specific set of attributes, we can use an interface.
+  - Implement (used for polymorphism): Whenever we want to say that an object being passed has a specific set of attributes,
+    we can use an interface.
     A class can implement more than one interface, which have their own attributes and/or (empty)methods .
     Each class that implements a particular interface with a method, is required to write out a specific code for this methods.
     NOTE: all attributes of an interface are public!
@@ -124,12 +127,20 @@ So we should avoid touching the tested and reliable (mostly) production code if 
 This means that, given that class B is a subclass of class A, we should be able to pass an object of class B
 to any method that expects an object of class A and the method should not give any weird output in that case.
 
-This is the expected behavior, because when we use inheritance we assume that the child class inherits everything that the superclass has.
+This is the expected behavior, because when we use inheritance we assume that the child class inherits everything
+that the superclass has.
 The child class extends the behavior but never narrows it down.
 
 Therefore, when a class does not obey this principle, it leads to some nasty bugs that are hard to detect.
 
-==== INTERFACE SEGREGATION PRINCIPLE — Interfaces should be client specific rather than general.
+==== INTERFACE SEGREGATION PRINCIPLE:
+*Interfaces should be client specific rather than general.*
+No code should be forced to depend on methods it does not use.
+Interfaces that are very large needs to be split into smaller and more specific ones so that clients will only have
+to know about the methods that are of interest to them.
+Similar to the Single Responsibility Principle, the goal of the Interface Segregation Principle is to reduce
+the side effects and frequency of required changes by splitting the software into multiple, independent parts.
+By following this principle, you prevent bloated interfaces that define methods for multiple responsibilities.
 
 ==== DEPENDENCY INVERSION PRINCIPLE — Depend on abstractions rather than concretions.
 
@@ -150,13 +161,23 @@ you only have to do this in 1 place. (turn music on/of)
 I made the function 'makeSound' dependent on the animal instead of the zoo.
 Because all animal classes were so similar, I made a new class (Anima) to which you pass what type of animal it is.
 I don't know if it's supposed to be that way, but this seems the most logical to me...
-It was not the right solution, so I had to change it. I created an interface 'CanMakeSound' and implemented it into the other classes.
+It was not the right solution, so I had to change it. I created an interface 'CanMakeSound'
+and implemented it into the other classes.
 
 ==== 2.L
 I made a class for each type of discount, witch implement an interface (DiscountType) who has two functions,
 so all the discounts types have their own method for this.
-I wasn't sure if no-discount needed a unique class, as there is no discount, but to keep things equal, a class is provided for this too.
+I wasn't sure if no-discount needed a unique class, as there is no discount, but to keep things equal,
+a class is provided for this too.
 
+==== 3.I
+I have created 3 iterfaces to login, each with their own methods (set token and check login).
+The users class implements them all 3, the admin only implements the interface to login with a password.
+Because the Bot can only log in with google, I only implement this interface.
+
+When checking if you are admin or guest, I changed the code a bit.
+If the  'Login as admin' checkbox is not checked, you are a guest and I only check the loging for guest.
+If the box is checked, I check the loging for admin.
 
 
 
