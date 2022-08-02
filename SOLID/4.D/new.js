@@ -1,21 +1,21 @@
-var Oven = /** @class */ (function () {
-    function Oven() {
+var OvenGas = /** @class */ (function () {
+    function OvenGas() {
     }
-    Oven.prototype.lightGas = function () {
+    OvenGas.prototype.turnOvenOn = function () {
         setTimeout(function () {
             document.getElementById('target').innerHTML += "<p>" + new Date().getHours() + ":" + new Date().getMinutes() + " : THE GAS IS ON!</p>";
         }, 1000);
         console.log("THE GAS IS ON!"); //insert fart humor here
         this._isOn = true;
     };
-    Oven.prototype.extinguishGas = function () {
+    OvenGas.prototype.turnOvenOff = function () {
         setTimeout(function () {
             document.getElementById('target').innerHTML += "<p>" + new Date().getHours() + ":" + new Date().getMinutes() + " : THE GAS IS OFF!</p><hr>";
         }, 3000);
         console.log("THE GAS IS OFF!"); //insert fart humor here
         this._isOn = false;
     };
-    Oven.prototype.bake = function (item) {
+    OvenGas.prototype.bake = function (item) {
         if (this._isOn) {
             setTimeout(function () {
                 document.getElementById('target').innerHTML += "<p>" + new Date().getHours() + ":" + new Date().getMinutes() + " : Now baking " + item + " !</p>";
@@ -29,27 +29,56 @@ var Oven = /** @class */ (function () {
             console.log("there is no gas!"); //insert fart humor here
         }
     };
-    return Oven;
+    return OvenGas;
+}());
+var OvenElectric = /** @class */ (function () {
+    function OvenElectric() {
+    }
+    OvenElectric.prototype.turnOvenOn = function () {
+        setTimeout(function () {
+            document.getElementById('target').innerHTML += "<p>" + new Date().getHours() + ":" + new Date().getMinutes() + " : THE OVEN IS ON!</p>";
+        }, 1000);
+        console.log("THE OVEN IS ON!"); //insert fart humor here
+        this._isOn = true;
+    };
+    OvenElectric.prototype.turnOvenOff = function () {
+        setTimeout(function () {
+            document.getElementById('target').innerHTML += "<p>" + new Date().getHours() + ":" + new Date().getMinutes() + " : THE OVEN IS OFF!</p><hr>";
+        }, 3000);
+        console.log("THE OVEN IS OFF!");
+        this._isOn = false;
+    };
+    OvenElectric.prototype.bake = function (item) {
+        if (this._isOn) {
+            setTimeout(function () {
+                document.getElementById('target').innerHTML += "<p>" + new Date().getHours() + ":" + new Date().getMinutes() + " : Now baking " + item + " !</p>";
+            }, 2000);
+            console.log("Now baking " + item + "!");
+        }
+        else {
+            setTimeout(function () {
+                document.getElementById('target').innerHTML += "<p>" + new Date().getHours() + ":" + new Date().getMinutes() + " : there is no electricity!</p>";
+            }, 2000);
+            console.log("there is no electricity!");
+        }
+    };
+    return OvenElectric;
 }());
 var Restaurant = /** @class */ (function () {
-    function Restaurant(name) {
-        this._oven = new Oven();
+    function Restaurant(name, oven) {
         this._name = name;
+        this._oven = oven;
     }
     Restaurant.prototype.Cook = function (item) {
-        this._oven.lightGas();
+        this._oven.turnOvenOn();
         this._oven.bake(item);
-        this._oven.extinguishGas();
+        this._oven.turnOvenOff();
     };
     return Restaurant;
 }());
-var bakery = new Restaurant("Bakery");
+/*let bakery = new Restaurant("Bakery");
+bakery.Cook("cookies");*/
+var bakery = new Restaurant("Bakery", new OvenGas());
 bakery.Cook("cookies");
-//Now if we want to add a new restaurant with an ELECTRIC cooker, we are gonna be in a hot mess ...
-/*
-let bakery = new Restaurant("Bakery", new Oven());
-bakery.Cook("cookies");
-
-let crepery = new Restaurant("Crepery", new Stove());
-crepery.Cook("crepes");
- */
+var creperie = new Restaurant("Creperie", new OvenElectric());
+creperie.Cook("crepes");
