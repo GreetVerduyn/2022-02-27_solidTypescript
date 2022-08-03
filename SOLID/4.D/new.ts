@@ -5,8 +5,6 @@ interface KitchenAppliance{
 
 }
 
-
-
 class OvenGas implements KitchenAppliance{
     private _isOn : boolean;
 

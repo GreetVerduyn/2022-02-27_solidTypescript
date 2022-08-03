@@ -19,7 +19,7 @@ affect the specification of the class.
   -  if a class follows SRP, you can't think of more than one reason for that class to change
   -  a class should do one thing, and therefore it should have only a single reason to change.
 
-==== OPEN-CLOSED PRINCIPLE:
+==== OPEN-CLOSED PRINCIPLE (OCP):
 *Classes and other entities should be open for extension but closed for modification.*
 So what this principle wants to say is: We should be able to add new functionality without touching the existing code for the class.
 This is because whenever we modify the existing code, we are taking the risk of creating potential bugs.
@@ -35,6 +35,14 @@ So we should avoid touching the tested and reliable (mostly) production code if 
     The extends keyword is used in class declarations or class expressions to create a class that is a child of another class.
     The child class inherits all properties and methods from the parent class, it can override some of these and implement new ones,
     but the parent stuff is already included.
+
+===== Do we need to make all classes abstract or make interfaces for everything?
+We have to ask ourselves following questions:
+1. Is the anticipated change related to intrinsic instability of business requirements?
+2. What kind of changes usually happen on projects lik this one?
+3. If the potential change doesn't correspond to 1 or 2 above, don't apply OCP
+4. When requirements change, identify opportunities for extraction of meaningful abstractions and then refactor accordingly
+
 
 image::images/image-2022-08-02-15-11-18-682.png[]
 

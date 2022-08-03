@@ -37,8 +37,6 @@ class Engine{
 
 }
 
-
-
 class Car {
     private _fuel : number = 0;
     private _miles : number = 0;
