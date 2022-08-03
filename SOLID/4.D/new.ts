@@ -1,13 +1,16 @@
-interface Oven{
-    turnOvenOn()
-    turnOvenOff()
-    bake(item:string)
+interface KitchenAppliance{
+    prepareFood(item:string)
+    turnOn()
+    turnOff()
+
 }
 
-class OvenGas implements Oven{
+
+
+class OvenGas implements KitchenAppliance{
     private _isOn : boolean;
 
-    public turnOvenOn() : void
+    public turnOn() : void
     {
         setTimeout(function (){
             document.getElementById('target').innerHTML += "<p>"+new Date().getHours()+":"+new Date().getMinutes()+" : THE GAS IS ON!</p>";
@@ -16,7 +19,7 @@ class OvenGas implements Oven{
         this._isOn = true;
     }
 
-    public turnOvenOff() : void
+    public turnOff() : void
     {
         setTimeout(function (){
             document.getElementById('target').innerHTML += "<p>"+new Date().getHours()+":"+new Date().getMinutes()+" : THE GAS IS OFF!</p><hr>";
@@ -25,7 +28,7 @@ class OvenGas implements Oven{
         this._isOn = false;
     }
 
-    public bake(item : string)
+    public prepareFood(item : string)
     {
         if(this._isOn) {
             setTimeout(function (){
@@ -42,41 +45,80 @@ class OvenGas implements Oven{
         }
     }
 }
-class OvenElectric implements Oven{
+class OvenElectric implements KitchenAppliance{
     private _isOn : boolean;
 
-    public turnOvenOn() : void
+    public turnOn() : void
     {
         setTimeout(function (){
-            document.getElementById('target').innerHTML += "<p>"+new Date().getHours()+":"+new Date().getMinutes()+" : THE OVEN IS ON!</p>";
-        }, 1000);
+            document.getElementById('target').innerHTML += "<p>"+new Date().getHours()+":"+new Date().getMinutes()+" : THE ELECTRIC OVEN IS ON!</p>";
+        }, 4000);
         console.log("THE OVEN IS ON!"); //insert fart humor here
         this._isOn = true;
     }
 
-    public turnOvenOff() : void
+    public turnOff() : void
     {
         setTimeout(function (){
-            document.getElementById('target').innerHTML += "<p>"+new Date().getHours()+":"+new Date().getMinutes()+" : THE OVEN IS OFF!</p><hr>";
-        }, 3000);
+            document.getElementById('target').innerHTML += "<p>"+new Date().getHours()+":"+new Date().getMinutes()+" : THE ELECTRIC OVEN IS OFF!</p><hr>";
+        }, 6000);
         console.log("THE OVEN IS OFF!");
         this._isOn = false;
     }
 
-    public bake(item : string)
+    public prepareFood(item : string)
     {
         if(this._isOn) {
             setTimeout(function (){
                 document.getElementById('target').innerHTML += "<p>"+new Date().getHours()+":"+new Date().getMinutes()+" : Now baking " + item + " !</p>";
-            }, 2000);
+            }, 5000);
             console.log("Now baking " + item + "!");
         }
         else
         {
             setTimeout(function (){
                 document.getElementById('target').innerHTML += "<p>"+new Date().getHours()+":"+new Date().getMinutes()+" : there is no electricity!</p>";
-            }, 2000);
+            }, 5000);
             console.log("there is no electricity!");
+        }
+    }
+}
+
+class Fridge implements KitchenAppliance{
+    private _isOn : boolean;
+
+    public turnOn() : void
+    {
+        setTimeout(function (){
+            document.getElementById('target').innerHTML += "<p>"+new Date().getHours()+":"+new Date().getMinutes()+" : THE RAPID COOLING IS ON!</p>";
+        }, 7000);
+        console.log("THE RAPID COOLING IS ON!"); //insert fart humor here
+        this._isOn = true;
+    }
+
+    public turnOff() : void
+    {
+        setTimeout(function (){
+            document.getElementById('target').innerHTML += "<p>"+new Date().getHours()+":"+new Date().getMinutes()+" : THE RAPID COOLING IS OFF!</p><hr>";
+        }, 10000);
+        console.log("THE RAPID COOLING IS OFF!");
+        this._isOn = false;
+    }
+
+    public prepareFood(item : string)
+    {
+        if(this._isOn) {
+            setTimeout(function (){
+                document.getElementById('target').innerHTML += "<p>"+new Date().getHours()+":"+new Date().getMinutes()+" : Now cooling " + item + " !</p>";
+            }, 9000);
+            console.log("Now cooling " + item + "!");
+        }
+        else
+        {
+            setTimeout(function (){
+                document.getElementById('target').innerHTML += "<p>"+new Date().getHours()+":"+new Date().getMinutes()+" : the fridge is broken!</p>";
+            }, 9000);
+            console.log("the fridge is broken!");
         }
     }
 }
@@ -84,17 +126,17 @@ class OvenElectric implements Oven{
 
 class Restaurant {
     private _name : string;
-    private _oven : Oven;
+    private _kitchenAppliance : KitchenAppliance
 
-    constructor(name : string, oven:Oven) {
+    constructor(name : string, kitchenAppliance:KitchenAppliance) {
         this._name = name;
-        this._oven = oven;
+        this._kitchenAppliance = kitchenAppliance;
     }
 
-    public Cook(item : string) {
-        this._oven.turnOvenOn();
-        this._oven.bake(item);
-        this._oven.turnOvenOff();
+    public makeFood(item : string) {
+        this._kitchenAppliance.turnOn();
+        this._kitchenAppliance.prepareFood(item);
+        this._kitchenAppliance.turnOff();
     }
 }
 
@@ -104,8 +146,13 @@ bakery.Cook("cookies");*/
 
 
 let bakery = new Restaurant("Bakery", new OvenGas());
-bakery.Cook("cookies");
+bakery.makeFood("cookies");
 
 let creperie = new Restaurant("Creperie", new OvenElectric());
-creperie.Cook("crepes");
+creperie.makeFood("crepes");
+
+let iceCreamParlour = new Restaurant("Ice-cream Parlour", new Fridge());
+iceCreamParlour.makeFood("ice cream");
+
+
 

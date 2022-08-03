@@ -105,95 +105,19 @@ If the  'Login as admin' checkbox is not checked, you are a guest and I only che
 If the box is checked, I check the login for admin.
 
 
+==== 4.I
+The Restaurant class depends on usage of its Oven object.
+What if we wanted to make a restaurant that uses a different kind of cooking instrument?
+As currently implemented, we couldn’t do so without going into the Restaurant class and making changes,
+which would violate the Open/Closed Principle.
+Changes to the Oven object have the potential to cascade through the program and break the Restaurant class’
+Cook method. For example, what if we decided that we wanted to make our ovens electric rather than gas and changed
+the LightGas and ExtinguishGas method names? Doing so would effectively break Restaurant because it relies on using
+those Oven methods as currently named.
+The coupling between Restaurant and Oven reduces portability, meaning that we can’t re-use Restaurant in another location
+without bringing Oven with it. (Even if the other program never uses Oven.)
 
 
-===  TYPESCRIPT
 
-* WHAT :
-superscript of JavaScript
 
-* WHY: 
-** types defines -&gt; safer
-** easy; few lines of code
-** OOP: interfaces, inheritance and encapsulation
-
-* HOW:
-* variables and Data Types:
-** Primitive Types (number, string, boolean, any) :
-*** you can declare 1 type: ``variable:type = ... ;`
-*** or multiple: `variable:type1 | type2 = ... ;`
-* Array Types : `variable: Array<type>; = ... ;`
-* enum variables:
- `- Enum Types (predetermined values) :
-
-  enum Variable {                                //with capital letter
-  Value1, // index 0
-  Value2, // index 1
-  Value3=5 //index = 5
-  }
- console.log(Variable.Value1); // gives the index number of the enum value1 (O)
- console.log(Variable[1]); // gives the name af the enum, with index 1 (value2)
- console.log(Variable[5]); // gives the name af the enum, with index 5 (value3)
-
-* Comments (// or /* */)
-
-* string types
-
- var s1:string = "<a href=''/>";
- var userName:string= 'Greet';
- var s2:string = `My name is ${userName}`;
- console.log(s2);
- console.log(s2.length);
- console.log(s2.charAt(0));
- console.log(s2.indexOf('n')); // first appearance
- console.log(s2.lastIndexOf('n')); // last appearance
- console.log(username.charCodeAt(0)); // caractercode of first caracter (capital)
-
-* Arithmetic (-, +, %, /, *)
-* Assignment (= and compound operators: +=, -=, %=, /=, *= )
-* Comparison (=== , !==, &gt;, &lt;, &lt;=, &gt;=)
-* Logical (&amp;&amp; , ||, !) used in booleans
-* Ternary (testExpression? value1: value2) // if true =&gt; value1, if not true =&gt; value2
-
-* Flow Control
- ** Selection (if=else, switch)
- ** Iterative (while, for)
- ** Transfer (break, continue)
-
-*  Objects
-
-** for In Loop
-
- for(var item in student){
-   console.log(item);
-   console.log(student[item]                // Te get the values
- });
-
-* Arrays
-
-NOTE: De-structuring in Array != de-structuring in Objects
-
-* Functions
-** Optional Parameters
-** Default Values
-** Anonymous Function
-** Functional Overloading
-** Rest params
-*Arrow Functions
-** Variable Prefixes
-* let
-* const
-* declare
-* OOPS
-** Interfaces
-** object
-** functions
-** arrays
-** Classes
-** create
-** constructor
-** implementing an interface
-** inheritance
-** encapsulation
-** type casting
 
